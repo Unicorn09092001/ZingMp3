@@ -19,15 +19,17 @@ import {
   getFavoritePlaylists,
   getFavoriteSongs,
   getFavoriteAlbums,
-  getHistoryPage
+  getHistoryPage,
 } from "app/services";
 import { setIsLoadingTab } from "Slice/isLoadingTabSlice";
 import { setPlaylistCurrent } from "Slice/playlistCurrentSlice";
 import { setArtistAlias } from "Slice/artistPageDataSlice";
+import ModalMV from "components/ModalMV/modalMV";
 
 function App() {
   const dispatch = useDispatch();
   const currentTheme = useSelector(currentThemeSelector);
+  const { isOpenModalMv } = useSelector((state) => state.mvList);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -59,14 +61,13 @@ function App() {
 
   window.onload = () => {
     getHistoryPage().then((history) => {
-      if(history.data.page === "playlist") {
-        dispatch(setIsLoadingTab(true));
+      if (history.data.page === "playlist") {
         dispatch(setPlaylistCurrent(history.data.encodeId));
       } else if (history.data.page === "artist") {
         dispatch(setArtistAlias(history.data.alias));
       }
-    })
-  }
+    });
+  };
 
   return (
     <GlobalStyles>
@@ -88,6 +89,7 @@ function App() {
         <Player />
         <ThemeModal />
         <Toast />
+        {isOpenModalMv && <ModalMV />}
       </div>
     </GlobalStyles>
   );

@@ -22,6 +22,7 @@ import playlistCurrentReducer from "Slice/playlistCurrentSlice";
 import isLoadingTabReducer from "Slice/isLoadingTabSlice";
 import artistPageDataReducer from "Slice/artistPageDataSlice";
 import searchKeyWordReducer from "Slice/searchKeyWordSlice"
+import mvListReducer from "Slice/mvListSlice"
 
 const rootReducer = {
   listSong: songReducer,
@@ -48,6 +49,7 @@ const rootReducer = {
   isLoadingTab: isLoadingTabReducer,
   artistPageData: artistPageDataReducer,
   searchKeyWord: searchKeyWordReducer,
+  mvList: mvListReducer,
 };
 
 const store = configureStore({

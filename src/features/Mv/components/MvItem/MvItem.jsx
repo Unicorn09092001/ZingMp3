@@ -1,9 +1,14 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { formatAudioTime } from "utils";
+import { setArtistAlias } from "Slice/artistPageDataSlice";
+import { setHistoryPage } from "app/services";
+import { setMvId } from "Slice/mvListSlice";
 
 function MvItem({ mv }, ref) {
-  const { artists, artist, thumbnailM, title, duration } = mv;
+  const { artists, artist, thumbnailM, title, duration, encodeId } = mv;
+  const dispatch = useDispatch();
   const itemRef = useRef();
 
   useImperativeHandle(ref, () => ({
@@ -26,7 +31,12 @@ function MvItem({ mv }, ref) {
             <div className="action-btn mv-btn--close">
               <i className="bi bi-x-lg btn--icon"></i>
             </div>
-            <div className="btn--play-playlist">
+            <div
+              className="btn--play-playlist"
+              onClick={() => {
+                dispatch(setMvId({ videoId: encodeId, isOpenModalMv: true }));
+              }}
+            >
               <div className="control-btn btn-toggle-play">
                 <i className="bi bi-play-fill icon-play"></i>
               </div>
@@ -44,11 +54,25 @@ function MvItem({ mv }, ref) {
               }}
             ></div>
             <div className="media__info">
-              <span className="info__title is-active is-twoline">{title}</span>
+              <span
+                className="info__title is-active is-twoline"
+                onClick={() => {
+                  dispatch(setMvId({ videoId: encodeId, isOpenModalMv: true }));
+                }}
+              >
+                {title}
+              </span>
               <p className="info__author">
                 {artists?.map((item, index) => (
                   <React.Fragment key={index}>
-                    <NavLink to={"/artist/name=" + artist.alias} className="is-ghost">
+                    <NavLink
+                      to={"/artist/name=" + artist.alias}
+                      className="is-ghost"
+                      onClick={() => {
+                        dispatch(setArtistAlias(artist.alias));
+                        setHistoryPage({ alias: artist.alias, page: "artist" });
+                      }}
+                    >
                       {item?.name}
                     </NavLink>
                     {index < artists?.length - 1 && ", "}

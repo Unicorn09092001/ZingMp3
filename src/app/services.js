@@ -34,6 +34,27 @@ const HISTORY_PAGE = "https://629f0c738b939d3dc28d6fcc.mockapi.io/History_path/1
 
 const API_SEARCH="http://localhost:3000/api/search?keyword=";
 
+const API_SONG_LYRIC = "http://localhost:3000/api/lyric?id=";
+
+const API_MV_LIST = "http://localhost:3000/api/listMV";
+
+const API_MV = "http://localhost:3000/api//video?id=";
+
+export const getApiMv = (id) => {
+  var url = API_MV + id;
+  return axios.get(url)
+}
+
+export const getApiMvList = (id, page, count) => {
+  var url = API_MV_LIST + "?id=" + id + "&page=" + page + "&count=" + count;
+  return axios.get(url)
+}
+
+export const getApiSongLyric = (songId) => {
+  var url = API_SONG_LYRIC + songId
+  return axios.get(url)
+}
+
 export const getApiSearch = (keyWord) => {
   var url = API_SEARCH + keyWord;
   return axios.get(url)

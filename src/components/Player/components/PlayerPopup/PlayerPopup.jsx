@@ -1,12 +1,30 @@
-import React from "react";
+import { set } from "harmony-reflect";
+import { usePlayerStore } from "components/Player/hooks";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { currentThemeSelector } from "selectors/themeSelector";
 import PopupContent from "../PopupContent/PopupContent";
 import PopupFooter from "../PopupFooter/PopupFooter";
 import "./PlayerPopup.scss";
+import { getApiSongLyric } from "app/services";
 
 function PlayerPopup({ onClosePopup }) {
   const currentTheme = useSelector(currentThemeSelector);
+  const [currentTab, setCurrentTab] = useState(0);
+  const [songLyric, setSongLyric] = useState([]);
+  const { currentTime } = usePlayerStore();
+  const scrollRef = useRef();
+
+  const songId = useSelector((state) => state.songCurrentData.enCodeIDSong);
+  const currentSong = useSelector(
+    (state) => state.playSongCurrentInfo.listSong
+  );
+
+  useEffect(() => {
+    getApiSongLyric(songId).then((res) => {
+      setSongLyric(res.data.data?.sentences);
+    });
+  }, [songId]);
 
   const handleClosePopup = () => {
     if (onClosePopup) onClosePopup();
@@ -31,14 +49,32 @@ function PlayerPopup({ onClosePopup }) {
         </div>
         <div className="player__popup-container">
           <ul className="player__popup-menu">
-            <li className="player__popup-item active">
-              <a href="/">Danh Sách Phát</a>
+            <li
+              className={
+                currentTab === 0
+                  ? "player__popup-item active"
+                  : "player__popup-item"
+              }
+            >
+              <div onClick={() => setCurrentTab(0)}>Danh Sách Phát</div>
             </li>
-            <li className="player__popup-item">
-              <a href="/">Karaoke</a>
-            </li>
-            <li className="player__popup-item hide-on-mobile">
-              <a href="/">Lời Bài Hát</a>
+            {/* <li
+              className={
+                currentTab === 1
+                  ? "player__popup-item active"
+                  : "player__popup-item"
+              }
+            >
+              <div onClick={() => setCurrentTab(1)}>Karaoke</div>
+            </li> */}
+            <li
+              className={
+                currentTab === 2
+                  ? "player__popup-item active hide-on-mobile"
+                  : "player__popup-item hide-on-mobile"
+              }
+            >
+              <div onClick={() => setCurrentTab(2)}>Lời Bài Hát</div>
             </li>
           </ul>
         </div>
@@ -59,7 +95,67 @@ function PlayerPopup({ onClosePopup }) {
           </ul>
         </div>
       </div>
-      <PopupContent />
+      {currentTab === 0 ? (
+        <PopupContent />
+      ) : currentTab === 1 ? (
+        <div>tab2</div>
+      ) : currentTab === 2 ? (
+        <div className="lyric-wrapper">
+          <div className="song-thumbnail">
+            <img src={currentSong.thumbnailM} />
+          </div>
+          <div className="lyric" ref={scrollRef}>
+            {songLyric?.map((lyric) => {
+              if (
+                new Date(lyric.words[0].startTime).getSeconds() +
+                  new Date(lyric.words[0].startTime).getMinutes() * 60 <
+                  currentTime &&
+                new Date(
+                  lyric.words[lyric.words.length - 1].endTime
+                ).getSeconds() +
+                  new Date(
+                    lyric.words[lyric.words.length - 1].endTime
+                  ).getMinutes() *
+                    60 >
+                  currentTime
+              ) {
+                return (
+                  <div className={"lyric-line is-active"}>
+                    {lyric.words.map((word) => (
+                      <span>{word.data} </span>
+                    ))}
+                  </div>
+                );
+              } else if (
+                new Date(
+                  lyric.words[lyric.words.length - 1].startTime
+                ).getSeconds() +
+                  new Date(
+                    lyric.words[lyric.words.length - 1].startTime
+                  ).getMinutes() *
+                    60 <
+                currentTime
+              ) {
+                return (
+                  <div className="lyric-line is-over">
+                    {lyric.words.map((word) => (
+                      <span>{word.data} </span>
+                    ))}
+                  </div>
+                );
+              } else {
+                return (
+                  <div className="lyric-line">
+                    {lyric.words.map((word) => (
+                      <span>{word.data} </span>
+                    ))}
+                  </div>
+                );
+              }
+            })}
+          </div>
+        </div>
+      ) : null}
       <PopupFooter />
     </div>
   );

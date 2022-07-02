@@ -20,7 +20,8 @@ import PlaylistPage from "./pages/playlistPage/PlaylistPage";
 import ArtistPage from "./pages/ArtistPage/ArtistPage";
 import TabHomeArtist from "./pages/ArtistPage/tabs/tabHomeArtist";
 import SearchPage from "./pages/searchPage/SearchPage";
-
+import MvPage from "./pages/MvPage/MvPage";
+ 
 function Container() {
   const playlistId = useSelector((state) => state.playlistCurrent.encodeId);
   const artistData = useSelector((state) => state.artistPageData);
@@ -28,6 +29,8 @@ function Container() {
   const albumList = useSelector((state) => state.personalAlbum.list);
   const mvList = useSelector((state) => state.personalMv.list);
   const {searchPath} = useSelector(state => state.searchKeyWord)
+
+  const {link, code} = useSelector(state => state.mvList)
   
   return (
     <Routes>
@@ -50,7 +53,9 @@ function Container() {
       <Route path="moi-phat-hanh" element={<NewReleasePage />} />
       <Route path="hub" />
       <Route path="top100" element={<Top100Page />} />
-      <Route path="the-loai-video" />
+      <Route path="the-loai-video/" element={<MvPage/>}>
+          <Route path={link + "/" + code}/>
+      </Route>
       <Route path={"playlist/id=" + playlistId} element={<PlaylistPage />} />
       <Route
         path={"/artist/name=" + artistData.alias + "/"}

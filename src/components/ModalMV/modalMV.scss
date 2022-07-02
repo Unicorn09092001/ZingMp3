@@ -1,0 +1,252 @@
+.modalMV {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 35px;
+
+    transition: all 0.5s ease;
+
+    .modalMV-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        filter: blur(50px);
+        -webkit-filter: blur(50px);
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        z-index: 1;
+        transition: all 0.5s ease;
+    }
+
+    .modalMV-bg-opacity {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(0 0 0 / 52%);
+    }
+
+    .modalMV-header {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 2;
+
+        .MV-detail {
+            align-items: center;
+            display: flex;
+            padding: 10px 0;
+            img {
+                border-radius: 50%;
+                cursor: pointer;
+                height: 40px;
+                width: 40px;
+            }
+            .MV-box-detail {
+                display: flex;
+                flex: 1 1;
+                flex-direction: column;
+                justify-content: space-evenly;
+                margin-left: 10px;
+                .MV-title {
+                    cursor: pointer;
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: var(--text-color);
+                    line-height: 20px;
+                }
+                .MV-singer {
+                    color: var(--placeholder-text);
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 14px;
+                    margin: 6px 0 0;
+                }
+            }
+        }
+    }
+
+    .btn-close-MV {
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.102);
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .modalMV-content {
+        height: 90%;
+        width: 100%;
+        z-index: 2;
+    }
+}
+
+.modalMV-header {
+    .MV-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .MV-singer {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
+.modalMV-content {
+    display: flex;
+    
+    .modalMV-video {
+        width: 75%;
+        border-radius: 8px;
+        background: black;
+    }
+}
+
+.more-MV {
+    width: 350px;
+    height: 100%;
+    margin-left: 30px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.102);
+    color: var(--text-color);
+
+    .more-MV-header {
+        height: 68px;
+        display: flex;
+        align-self: center;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 27px;
+    }
+}
+
+.more-MV-list {
+    overflow-y: overlay;
+    height: calc(100% - 90px);
+    padding: 0;
+
+    .more-MV-item {
+        display: flex;
+        padding: 5px 20px;
+        transition: all linear 0.2s;
+        &.active {
+            background-color: rgba(255, 255, 255, 0.082);
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.18);
+        }
+
+        &:hover .more-MV-item-hover {
+            display: flex;
+        }
+        .more-MV-item-img {
+            width: 120px;
+            height: 68px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all linear 0.2s;
+            .more-MV-bg {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                animation: mvbg2 linear 0.4s;
+            }
+            &:hover .more-MV-bg {
+                width: 110%;
+                animation: mvbg1 linear 0.4s;
+            }
+        }
+        @keyframes mvbg1 {
+            0% {width: 100%;}
+            50% {width: 105%;}
+            100% {width: 110%;}
+        }
+        @keyframes mvbg2 {
+            0% {width: 110%;}
+            50% {width: 105%;}
+            100% {width: 100%;}
+        }
+    }
+
+    .more-MV-item-detail {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 700;
+        flex: 1;
+    }
+
+    .more-MV-item-img {
+        position: relative;
+    }
+
+    .more-MV-item-hover {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.515);
+        border-radius: 8px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        cursor: pointer;
+
+        &.active {
+            display: flex;
+            cursor: unset;
+        }
+    }
+
+    .more-MV-title {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
+
+    .more-MV-singer {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--color-default);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
+}
+
+.more-MV-list::-webkit-scrollbar {
+    display: none;
+}

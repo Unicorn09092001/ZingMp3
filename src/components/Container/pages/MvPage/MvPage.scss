@@ -1,0 +1,35 @@
+.tab__mv-header {
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-primary);
+    width: calc(100vw - 237px);
+    position: absolute;
+    top: 70px;
+    left: 0%;
+    padding: 0 30px 15px 30px;
+    .tab__mv-title {
+        font-size: 24px;
+        line-height: 24px;
+        padding: 0 20px 0 0;
+        font-weight: 600;
+        border-right: 1px solid var(--border-primary);
+    }
+    .tab__mv-nav {
+        display: flex;
+        font-size: 14px;
+        color: var(--navigation-text);   
+        transition: all linear 0.2s;    
+        .tab__mv-nav-item {
+            padding: 17px  20px;
+            transition: all linear 0.2s;
+            &:hover {
+                color: var(--text-color);
+            }
+        }
+        .active {
+            color: var(--text-color);
+            border-bottom: 2px solid var(--purple-primary);
+        }
+    }
+}

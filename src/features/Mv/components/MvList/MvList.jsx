@@ -13,6 +13,7 @@ function MvList({
   const itemRef = useRef();
   const containerRef = useRef();
 
+
   useEffect(() => {
     const itemContentWidth = itemRef.current?.getWidth();
     const totalWidth = containerRef.current.offsetWidth;
@@ -26,6 +27,7 @@ function MvList({
     showSlide(slideIndex, containerRef.current, totalItemWidth);
   }, [slideIndex, step]);
 
+ 
   return (
     <div
       className={clsx("row", "mv--container", {
@@ -39,6 +41,7 @@ function MvList({
           className={clsx("col", "l-4", "m-6", "c-12", {
             [optionalClass]: !!optionalClass,
           })}
+          
         >
           <MvItem mv={mv} ref={itemRef} />
         </div>

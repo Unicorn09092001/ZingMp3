@@ -105,7 +105,7 @@ const songCurrentDataSlice = createSlice({
   name: "songCurrentData",
   initialState: {
     songCurrentList: [...songCurrentList],
-    enCodeIDSong: "",
+    enCodeIDSong: "ZZ8FBUW9",
     songIndexOfList: null,
     songPath: null,
     isPlaying: false,

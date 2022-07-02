@@ -5,8 +5,9 @@ import Playlist from "features/Playlist/Playlist";
 import PlayMusic from "features/PlayMusic/PlayMusic";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFavoriteArtists } from "app/services";
+import { getFavoriteArtists, getApiMvList } from "app/services";
 import { setPersonalArtist } from "features/Artist/personalArtistSlice";
+import { setMvList } from "Slice/mvListSlice";
 
 function TabHome() {
   const dispatch = useDispatch();
@@ -14,11 +15,14 @@ function TabHome() {
   const artistList = useSelector((state) => state.personalArtist.list);
   const favoriteSongs = useSelector((state) => state.favoriteSongs.songList);
   const favoriteAlbums = useSelector((state) => state.personalAlbum.list);
-  const mvList = useSelector((state) => state.personalMv.list);
+  const mvList = useSelector((state) => state.mvList);
 
   useEffect(() => {
     getFavoriteArtists().then((res) => {
       dispatch(setPersonalArtist(res.data));
+    });
+    getApiMvList(mvList.code, mvList.page, mvList.count).then((res) => {
+      dispatch(setMvList([...res.data.data.items]))
     });
   }, []);
 
@@ -51,11 +55,11 @@ function TabHome() {
 
       <Mv
         optionalClass={"mt-50"}
-        noWrap={mvList.length > 5 ? true : false}
+        noWrap={mvList.list.length > 5 ? true : false}
         sectionName="MV"
         navigable
         pathName="mvs"
-        mvList={mvList}
+        mvList={mvList.list}
       />
 
       <Artist
