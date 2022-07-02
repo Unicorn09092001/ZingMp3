@@ -1,0 +1,11 @@
+.loading--animate {
+    height: 100%;
+}
+
+.loading--animate-img {
+    width: 100px;
+    height: 100%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}

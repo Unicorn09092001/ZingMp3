@@ -1,0 +1,192 @@
+
+.content__header {
+    display: flex;
+    padding: 110px 4vw 40px 4vw;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-color); 
+    
+}
+
+.content__header-left {
+    width: 677px;
+    .content__header-title {
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 48px;
+        margin-bottom: 5px;
+    }
+    .content__header-biography{
+        min-height: 70px;
+        overflow: hidden;
+        font-size: 14px;
+        line-height: 1.64;
+        margin-bottom: 10px;
+        .read-more {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    .content__header-btns {
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        .content__header-btn {
+            font-size: 14px;
+            text-transform: uppercase;
+            padding: 6px 24px;
+            background: var(--purple-primary);
+            border-radius: 999px;
+            margin-right: 10px;
+            display: inline-flex;
+            align-items: center;
+            line-height: 24px;
+            .bi-play-fill {
+                font-size: 24px;
+            }
+        }
+    }
+    .top__album {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        .bg-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .top__album-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            margin-left: 10px;
+            height: 100%;
+            font-weight: 500;
+            span {
+                font-size: 10px;
+                text-transform: uppercase;
+            }
+            .top__album-title {
+                font-size: 14px;
+            }
+            .top__album-release {
+                font-size: 12px;
+                color: var(--text-secondary);
+            }
+        }
+    }
+}
+
+.content__header-right {
+    min-width: 260px;
+    height: 260px;
+    img {
+        width: 100%;
+        border-radius: 50%;
+    }
+}
+
+.artist-modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--dark-alpha-80);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    .artist-modal-content {
+        position: relative;
+        width: 480px;
+        border-radius: 8px;
+        background-color: var(--primary-bg);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        .artist-modal-btn {
+            position: absolute;
+            z-index: 1;
+            right: 10px;
+            top: 10px;
+            &:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
+            i {
+                font-size: 26px;
+                color: var(--text-color);
+            }
+        }
+        .content-top {
+            position: relative;
+            overflow: hidden;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            .content {
+                padding: 24px 0 0;
+                text-align: center;
+                position: relative;
+                background-image: linear-gradient(180deg,hsla(0,0%,100%,0),var(--primary-bg));
+            }
+            .content-top-img {
+                margin: 0 auto;
+                width: 110px;
+                height: 110px;
+                img {
+                    width: 100%;
+                    border-radius: 50%;
+                }
+            }
+            .content-top-title {
+                font-size: 24px;
+                font-weight: 700;
+                line-height: 36px;
+                margin: 0;
+                color: var(--text-color);
+            }
+            .content-top-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 170px;
+                filter: blur(50px);
+            }
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                opacity: 0.4;
+                width: 100%;
+                height: 170px;
+                background-color: var(--primary-bg);
+            }
+        }
+        .content-detail {
+            padding: 24px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            .content-text {
+                overflow-y: scroll;
+                max-height: 218px;
+                &::-webkit-scrollbar {
+                    width: 7px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 999px;
+                    background: var(--player-bg);
+                    border: 1px solid var(--player-bg);
+                }
+            }
+        }
+    }
+}

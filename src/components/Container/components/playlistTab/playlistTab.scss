@@ -1,0 +1,56 @@
+.playlist-tab {
+    background: var(--sidebar-popup-bg);
+    height: calc(100vh - 90px);
+    width: 330px;
+    position: fixed;
+    top: 0;
+    .playlist-tab-header {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 42px;
+        color: var(--text-color);
+        padding: 14px 8px;
+    }
+    .playlist-tab-body {
+        padding: 0 8px 15px 8px;
+        overflow-y: scroll;
+        height: calc(100vh - 160px);
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 99px;
+        }
+    }
+}
+
+.playlist-tab-open {
+    right: 0;
+    animation: playlistTabOpen 0.4s linear;
+}
+
+.playlist-tab-close {
+    right: -330px;
+    animation: playlistTabClose 0.4s linear;
+}
+
+@keyframes playlistTabOpen {
+    from {
+        right: -330px;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+@keyframes playlistTabClose {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: -330px;
+    }
+}
