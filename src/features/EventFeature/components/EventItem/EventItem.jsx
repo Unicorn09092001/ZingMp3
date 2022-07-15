@@ -36,7 +36,7 @@ function EventItem({ event = {} }, ref) {
                 Lượt chúc mừng
               </span>
               <div className="info__avatar">
-                {followers.map((follower, index) => (
+                {followers?.map((follower, index) => (
                   <div key={index} className="info__avatar-item">
                     <div
                       className="info__avatar-img"

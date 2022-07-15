@@ -111,7 +111,7 @@ function NewReleaseItem(
         <div className="row__item-info new-playlist--info">
           <span className="row__info-name is-twoline">{title}</span>
           <h3 className="row__info-creator">
-            {artists.map((artist, index) => (
+            {artists?.map((artist, index) => (
               <React.Fragment key={index}>
                 <NavLink
                   to={"/artist/name=" + artist.alias}

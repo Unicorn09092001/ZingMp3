@@ -5,6 +5,7 @@ import { formatAudioTime } from "utils";
 import { setArtistAlias } from "Slice/artistPageDataSlice";
 import { setHistoryPage } from "app/services";
 import { setMvId } from "Slice/mvListSlice";
+import { setSongPlaying } from "Slice/songCurrentDataSlice";
 
 function MvItem({ mv }, ref) {
   const { artists, artist, thumbnailM, title, duration, encodeId } = mv;
@@ -35,6 +36,7 @@ function MvItem({ mv }, ref) {
               className="btn--play-playlist"
               onClick={() => {
                 dispatch(setMvId({ videoId: encodeId, isOpenModalMv: true }));
+                dispatch(setSongPlaying(false))
               }}
             >
               <div className="control-btn btn-toggle-play">
@@ -71,6 +73,7 @@ function MvItem({ mv }, ref) {
                       onClick={() => {
                         dispatch(setArtistAlias(artist.alias));
                         setHistoryPage({ alias: artist.alias, page: "artist" });
+                        dispatch(setSongPlaying(false))
                       }}
                     >
                       {item?.name}

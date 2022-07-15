@@ -16,7 +16,7 @@ function ChartPage() {
   useEffect(() => {
     dispatch(setIsLoadingTab(true));
     getApiChartPage().then((res) => {
-      dispatch(getChartData(res.data.data.RTChart.items));
+      dispatch(getChartData(res.data.data?.RTChart.items));
       dispatch(setIsLoadingTab(false));
     });
   }, []);

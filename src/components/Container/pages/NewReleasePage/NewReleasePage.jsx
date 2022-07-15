@@ -19,7 +19,7 @@ function NewReleasePage() {
   useEffect(() => {
     dispatch(setIsLoadingTab(true));
     getApiNewReleasePage().then((res) => {
-      dispatch(getNewRelease(res.data.data.song.items));
+      dispatch(getNewRelease(res.data.data?.song.items));
       dispatch(setIsLoadingTab(false));
     });
   }, []);

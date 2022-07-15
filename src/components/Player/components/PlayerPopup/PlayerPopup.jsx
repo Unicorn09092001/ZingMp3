@@ -11,6 +11,7 @@ import { getApiSongLyric } from "app/services";
 function PlayerPopup({ onClosePopup }) {
   const currentTheme = useSelector(currentThemeSelector);
   const [currentTab, setCurrentTab] = useState(0);
+  const [count, setCount] = useState(0);
   const [songLyric, setSongLyric] = useState([]);
   const { currentTime } = usePlayerStore();
   const scrollRef = useRef();
@@ -25,6 +26,19 @@ function PlayerPopup({ onClosePopup }) {
       setSongLyric(res.data.data?.sentences);
     });
   }, [songId]);
+
+  useEffect(() => {
+    // let indexWord = songLyric[count].words.length -1
+    // if (
+    //   new Date(songLyric[count].words[indexWord].endTime).getSeconds() +
+    //     new Date(songLyric[count].words[indexWord].endTime).getMinutes() *
+    //       60 <
+    //   currentTime
+    // ) {
+    //   setCount(count+1)
+    //   scrollRef.current.scrollTop += 1;
+    // }
+  }, [currentTime]);
 
   const handleClosePopup = () => {
     if (onClosePopup) onClosePopup();

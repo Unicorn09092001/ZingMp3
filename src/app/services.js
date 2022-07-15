@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_CHART_PAGE = "http://localhost:3000/api/chart-home";
+const API_CHART_PAGE = "http://localhost:3000/api/charthome";
 
-const API_NEW_RELEASE_PAGE = "http://localhost:3000/api/playlist?id=ZABDOABU";
+const API_NEW_RELEASE_PAGE = "http://localhost:3000/api/detailplaylist?id=ZABDOABU";
 
 const API_PATH_SONG = "http://localhost:3000/api/song?id=";
 
@@ -15,7 +15,7 @@ const API_EXPLORE_PAGE = "http://localhost:3000/api/home?page=";
 //const API_TOP100_PAGE = "http://localhost:3000/api/top100";
 const API_TOP100_PAGE = "http://localhost:3000/api/top100";
 
-const API_PLAYLIST_INFO = "http://localhost:3000/api/playlist?id=";
+const API_PLAYLIST_INFO = "http://localhost:3000/api/detailplaylist?id=";
 //"http://localhost:3000/api/playlist?id=";
 
 const API_FAVORITE_SONGS =
