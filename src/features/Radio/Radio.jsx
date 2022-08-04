@@ -47,7 +47,7 @@ function Radio({
       <div className="col l-12 m-12 c-12 mb-16">
         <ContainerHeader
           onChangeIndex={handleChangeIndex}
-          listLength={listRadio.length}
+          listLength={listRadio?.length}
           slideIndex={slideIndex}
           noWrap={noWrap}
           sectionName={sectionName}

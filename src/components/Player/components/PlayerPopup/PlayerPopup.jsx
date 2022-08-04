@@ -28,23 +28,27 @@ function PlayerPopup({ onClosePopup }) {
         setSongLyric(res.data.data?.sentences);
       })
       .then(() => {
-        if (loadPageCount !== 1) {
-          scrollRef.current.scrollTop = 0;
-          setCount(3);
+        if(currentTab === 2) {
+          if (loadPageCount !== 1) {
+            scrollRef.current.scrollTop = 0;
+            setCount(3);
+          }
+          setLoadPageCount(loadPageCount + 1);
         }
-        setLoadPageCount(loadPageCount + 1);
       });
   }, [songId]);
 
   useEffect(() => {
-    if (
-      new Date(songLyric[count]?.words[0].startTime).getSeconds() +
-        new Date(songLyric[count]?.words[0].startTime).getMinutes() * 60 <
-      currentTime
-    ) {
-      setCount(count + 1);
-      if (currentTime > 0) {
-        scrollRef.current.scrollTop += 90;
+    if(currentTab === 2) {
+      if (
+        new Date(songLyric[count]?.words[0].startTime).getSeconds() +
+          new Date(songLyric[count]?.words[0].startTime).getMinutes() * 60 <
+        currentTime
+      ) {
+        setCount(count + 1);
+        if (currentTime > 0) {
+          scrollRef.current.scrollTop += 90;
+        }
       }
     }
   }, [currentTime]);
