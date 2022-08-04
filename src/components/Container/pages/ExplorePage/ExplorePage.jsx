@@ -53,25 +53,33 @@ function ExplorePage() {
     getApiExplorePage("1").then((res) => {
       dispatch(setListSlide(res.data.data.items[0].items));
       dispatch(setNormalPlaylist(res.data.data.items));
+      dispatch(setListRadio(res.data.data.items[13].items));
+      dispatch(setExplorePlaylist(res.data.data.items[1]));
+      dispatch(setLabelList(res.data.data.items[6].items));
+      dispatch(setTop100(res.data.data.items[8]));
+      dispatch(setEventList(res.data.data.items[14].items));
+      dispatch(setNewReleaseList(res.data.data.items[9].items));
+      dispatch(setExploreAlbum(res.data.data.items[10].items));
+      dispatch(setFavoriteArtistList(res.data.data.items[15].items));
       dispatch(setIsLoadingTab(false));
     });
-    getApiExplorePage("2").then((res) => {
-      dispatch(setListRadio(res.data.data.items[0].items));
-      dispatch(setExplorePlaylist(res.data.data.items[1]));
-    });
-    getApiExplorePage("3").then((res) => {
-      dispatch(setLabelList(res.data.data.items[1].items));
-      dispatch(setTop100(res.data.data.items[3]));
-      dispatch(setEventList(res.data.data.items[4].items));
-    });
-    getApiExplorePage("4").then((res) => {
-      dispatch(setNewReleaseList(res.data.data.items[0].items));
-    });
+    // getApiExplorePage("2").then((res) => {
+    //   dispatch(setListRadio(res.data.data.items[11].items));
+    //   dispatch(setExplorePlaylist(res.data.data.items[1]));
+    // });
+    // getApiExplorePage("3").then((res) => {
+    //   dispatch(setLabelList(res.data.data.items[1].items));
+    //   dispatch(setTop100(res.data.data.items[3]));
+    //   dispatch(setEventList(res.data.data.items[14].items));
+    // });
+    // getApiExplorePage("4").then((res) => {
+    //   dispatch(setNewReleaseList(res.data.data.items[0].items));
+    // });
 
-    getApiExplorePage("5").then((res) => {
-      dispatch(setExploreAlbum(res.data.data.items[0].items));
-      dispatch(setFavoriteArtistList(res.data.data.items[1].items));
-    });
+    // getApiExplorePage("5").then((res) => {
+    //   dispatch(setExploreAlbum(res.data.data.items[0].items));
+    //   dispatch(setFavoriteArtistList(res.data.data.items[1].items));
+    // });
   }, []);
 
   useEffect(() => {
@@ -104,7 +112,7 @@ function ExplorePage() {
                 </div>
               </div>
               {/* <!-- Playlists --> */}
-              {normalPlaylist
+              {/* {normalPlaylist
                 .filter((item, index) => index > 2)
                 .map((playlist, indexPlaylist) => (
                   <NormalPlaylist
@@ -114,11 +122,32 @@ function ExplorePage() {
                     optionalClass="mt-30"
                     noWrap
                   />
-                ))}
-              <SpecialPlaylist
+                ))} */}
+              <NormalPlaylist
+                key={normalPlaylist[20]?.sectionType}
+                sectionName={normalPlaylist[19]?.title}
+                playlistList={normalPlaylist[20]?.items}
+                optionalClass="mt-30"
+                noWrap
+              />
+              <NormalPlaylist
+                key={normalPlaylist?.sectionType}
+                sectionName={normalPlaylist[4]?.title}
+                playlistList={normalPlaylist[4]?.items}
+                optionalClass="mt-30"
+                noWrap
+              />
+              <NormalPlaylist
+                key={normalPlaylist?.title}
+                sectionName={normalPlaylist[11]?.title}
+                playlistList={normalPlaylist[11]?.items}
+                optionalClass="mt-30"
+                noWrap
+              />
+              {/* <SpecialPlaylist
                 playlistList={specialPlaylist[0]}
                 optionalClass="mt-30"
-              />
+              /> */}
               {/* <!-- Radio --> */}
               <Radio
                 sectionName="Radio nổi bật"
@@ -157,10 +186,10 @@ function ExplorePage() {
                 noWrap
               />
               {/* <!-- Playlist --> */}
-              <SpecialPlaylist
+              {/* <SpecialPlaylist
                 playlistList={specialPlaylist[1]}
                 optionalClass="mt-30"
-              />
+              /> */}
               {/* <!-- New Playlist --> */}
               <NewReleasePlaylist
                 optionalClass="mt-30"

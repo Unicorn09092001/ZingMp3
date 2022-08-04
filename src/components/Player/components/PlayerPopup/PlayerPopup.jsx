@@ -11,9 +11,10 @@ import { getApiSongLyric } from "app/services";
 function PlayerPopup({ onClosePopup }) {
   const currentTheme = useSelector(currentThemeSelector);
   const [currentTab, setCurrentTab] = useState(0);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(3);
   const [songLyric, setSongLyric] = useState([]);
   const { currentTime } = usePlayerStore();
+  const [loadPageCount, setLoadPageCount] = useState(1);
   const scrollRef = useRef();
 
   const songId = useSelector((state) => state.songCurrentData.enCodeIDSong);
@@ -22,22 +23,30 @@ function PlayerPopup({ onClosePopup }) {
   );
 
   useEffect(() => {
-    getApiSongLyric(songId).then((res) => {
-      setSongLyric(res.data.data?.sentences);
-    });
+    getApiSongLyric(songId)
+      .then((res) => {
+        setSongLyric(res.data.data?.sentences);
+      })
+      .then(() => {
+        if (loadPageCount !== 1) {
+          scrollRef.current.scrollTop = 0;
+          setCount(3);
+        }
+        setLoadPageCount(loadPageCount + 1);
+      });
   }, [songId]);
 
   useEffect(() => {
-    // let indexWord = songLyric[count].words.length -1
-    // if (
-    //   new Date(songLyric[count].words[indexWord].endTime).getSeconds() +
-    //     new Date(songLyric[count].words[indexWord].endTime).getMinutes() *
-    //       60 <
-    //   currentTime
-    // ) {
-    //   setCount(count+1)
-    //   scrollRef.current.scrollTop += 1;
-    // }
+    if (
+      new Date(songLyric[count]?.words[0].startTime).getSeconds() +
+        new Date(songLyric[count]?.words[0].startTime).getMinutes() * 60 <
+      currentTime
+    ) {
+      setCount(count + 1);
+      if (currentTime > 0) {
+        scrollRef.current.scrollTop += 90;
+      }
+    }
   }, [currentTime]);
 
   const handleClosePopup = () => {

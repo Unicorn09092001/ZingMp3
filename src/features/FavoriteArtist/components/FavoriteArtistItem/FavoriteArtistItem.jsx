@@ -24,7 +24,7 @@ function FavoriteArtistItem({ artist = {} }, ref) {
       onClick={() => {
         dispatch(setIsLoadingTab(true));
         dispatch(setPlaylistCurrent(artist.encodeId));
-        setHistoryPage({encodeId: artist.encodeId, page: "playlist"})
+        setHistoryPage({ encodeId: artist.encodeId, page: "playlist" });
       }}
     >
       <div className="row__item-container flex--top-left">
@@ -48,7 +48,7 @@ function FavoriteArtistItem({ artist = {} }, ref) {
             <h3 className="display__content-title is-oneline">{title}</h3>
             <p className="display__content-artist is-oneline">{artistsNames}</p>
             <div className="display__content-list">
-              {song.items.map((item, index) => (
+              {song?.items.map((item, index) => (
                 <div key={index} className="display__content-list-song">
                   <div
                     className="display__content-song-img"
