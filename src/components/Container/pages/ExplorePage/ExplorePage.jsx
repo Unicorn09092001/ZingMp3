@@ -53,14 +53,14 @@ function ExplorePage() {
     getApiExplorePage("1").then((res) => {
       dispatch(setListSlide(res.data.data.items[0].items));
       dispatch(setNormalPlaylist(res.data.data.items));
-      dispatch(setListRadio(res.data.data.items[13].items));
+      dispatch(setListRadio(res.data.data.items[15].items));
       dispatch(setExplorePlaylist(res.data.data.items[1]));
-      dispatch(setLabelList(res.data.data.items[6].items));
-      dispatch(setTop100(res.data.data.items[8]));
-      dispatch(setEventList(res.data.data.items[14].items));
-      dispatch(setNewReleaseList(res.data.data.items[9].items));
-      dispatch(setExploreAlbum(res.data.data.items[10].items));
-      dispatch(setFavoriteArtistList(res.data.data.items[15].items));
+      dispatch(setLabelList(res.data.data.items[8].items));
+      dispatch(setTop100(res.data.data.items[10]));
+      dispatch(setEventList(res.data.data.items[16].items));
+      dispatch(setNewReleaseList(res.data.data.items[11].items));
+      dispatch(setExploreAlbum(res.data.data.items[12].items));
+      dispatch(setFavoriteArtistList(res.data.data.items[5].items));
       dispatch(setIsLoadingTab(false));
     });
     // getApiExplorePage("2").then((res) => {
@@ -124,9 +124,9 @@ function ExplorePage() {
                   />
                 ))} */}
               <NormalPlaylist
-                key={normalPlaylist[20]?.sectionType}
-                sectionName={normalPlaylist[19]?.title}
-                playlistList={normalPlaylist[20]?.items}
+                key={normalPlaylist[6]?.sectionType}
+                sectionName={normalPlaylist[6]?.title}
+                playlistList={normalPlaylist[6]?.items}
                 optionalClass="mt-30"
                 noWrap
               />
@@ -139,8 +139,8 @@ function ExplorePage() {
               />
               <NormalPlaylist
                 key={normalPlaylist?.title}
-                sectionName={normalPlaylist[11]?.title}
-                playlistList={normalPlaylist[11]?.items}
+                sectionName={normalPlaylist[14]?.title}
+                playlistList={normalPlaylist[14]?.items}
                 optionalClass="mt-30"
                 noWrap
               />
